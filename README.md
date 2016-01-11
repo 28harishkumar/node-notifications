@@ -1,11 +1,9 @@
 ## Basic Info
--------
 * Framework used: Express.io
 * Template: Jade
 * Purpose: Sending data to client from node server using socket.io and GCM token (only on androids).
 
 ## Installation
--------
 1. Set config.js file
 	* auth_token (a random secret string, this token will be sent from remote server in each request).
 	* gcm_authorization_key (API key of google app)
@@ -19,9 +17,7 @@
 
 
 ## How to use
--------
 ### Step 1) Include script for client
--------
 
 First of all include these files in frontend page:
 
@@ -47,8 +43,7 @@ callback function will not parse JSON automatically.
 	2. It must be unique for each user (not for each device).
 	3. JS file links are relative here but give absolute links in production code
 
-### Step 2.1)
-------
+### Step 2.1) Send Data via web socket
 For sending data to client (using socket) hit POST request on url http://localhost:3000/emit with following parameters:
 1. auth_token (equal to the value set in config.js file)
 2. users (identification of users, saperated by comma (,))
@@ -58,8 +53,7 @@ For sending data to client (using socket) hit POST request on url http://localho
 	1. If you are sending json as data then stringify it in callback function yourself.
 	2. Users will get message only if they are active.
 
-### Step 2.2)
--------
+### Step 2.2) Send data via GCM (for android)
 For sending data to client (using GCM) hit POST request on url http://localhost:3000/gcm-emit with following parameters:
 1) auth_token (equal to the value set in config.js file)
 2) gcm (gcm token of all devices with comma (,) saperated)
@@ -69,14 +63,12 @@ For sending data to client (using GCM) hit POST request on url http://localhost:
 	1. Only stringified JSON object is accepted for data
 	2. Devices will get notification even if user(s) is (are) not active.
 
-### Step 3)
--------
+### Step 3) Get response from node server
 If notification are sent successfully, you will get "success" (without colons) message in response.
 
 **NOTE:** This is a text response, not a HTML response.
 
 ## Desktop Notifications
--------
 If you want to turn on desktop notification then you can use notifyMe() function defined in public/javascripts/socket.js.
 This function accepts two parameters: 
 	1. Title of the message
@@ -94,13 +86,12 @@ You can use this function like this:
 	});```
 
 ## Node server code flow:
--------
 1. Server is started by executing bin/www file 
 2. www file includes routes/index file 
 3. routes/index file returns the app object (app is server instance which is created in app.js file). 
 4. purpose of routes/index file is routing (app.js file is included here and routes are attached with app object). 
 5. HTTP requests are handled in middlewares directory 
-	* pusher.js is handling sending requests 
+	* pusher.js is handling normal http requests from remote server
  	* errors.js is handling errors (all errors written here will be included automatically) 
 6.  Socket requests are handled in listeners directory 
 	* index.js is handling events 
