@@ -1,0 +1,12 @@
+extends layout
+
+block js
+	script(src="/javascripts/socket.js")
+	script
+		| function callback(data){data = JSON.parse(data);notifyMe(data.name, data.message);}
+		| $(document).ready(function(){ socketio("http://localhost:3000", '233453', callback);});
+block content
+	h1= title
+	p Welcome to #{title}
+	#container
+	time
