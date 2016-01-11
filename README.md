@@ -1,7 +1,7 @@
 ## Basic Info
 * Framework used: Express.io
 * Template: Jade
-* Purpose: Sending data to client from node server using socket.io and GCM token (only on androids).
+* Purpose: Sending data to client from node server using socket.io (all platforms) and GCM token (only on androids).
 
 ## Installation
 1. Set config.js file
