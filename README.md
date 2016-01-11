@@ -1,19 +1,21 @@
 ## Basic Info
 -------
-Framework used: Express.io
-Template: Jade
-Purpose: Sending data to client from node server using socket.io and GCM token (only on androids).
+* Framework used: Express.io
+* Template: Jade
+* Purpose: Sending data to client from node server using socket.io and GCM token (only on androids).
 
 ## Installation
 -------
-Set config.js file
-	- auth_token (a random secret string, this token will be sent from remote server in each request).
-	- gcm_authorization_key (API key of google app)
-	- port (port on which node server will run, default is 3000)
-
-Run these commands in terminal:
-	npm install
-	npm start
+1. Set config.js file
+	* auth_token (a random secret string, this token will be sent from remote server in each request).
+	* gcm_authorization_key (API key of google app)
+	* port (port on which node server will run, default is 3000)
+	* Setup database config (mension in file)
+2. Setup database:
+	* import attached sql file (This file contains table structure for storing pending notificatoins for inacive users).
+3. Run these commands in terminal:
+	* npm install
+	* npm start
 
 
 ## How to use
@@ -93,14 +95,18 @@ You can use this function like this:
 
 ## Node server code flow:
 -------
-1. Server is started by executing bin/www file
-2. www file includes routes/index file
-3. routes/index file returns the app object (app is server instance which is created in app.js file).
-4. purpose of routes/index file is routing (app.js file is included here and routes are attached with app object).
-5. HTTP requests are handled in middlewares directory
-	- pusher.js is handling sending requests
-	- errors.js is handling errors (all errors written here will be included automatically)
-6. Socket requests are handled in listeners directory
-	- index.js is handling events
+1. Server is started by executing bin/www file 
+2. www file includes routes/index file 
+3. routes/index file returns the app object (app is server instance which is created in app.js file). 
+4. purpose of routes/index file is routing (app.js file is included here and routes are attached with app object). 
+5. HTTP requests are handled in middlewares directory 
+	* pusher.js is handling sending requests 
+ 	* errors.js is handling errors (all errors written here will be included automatically) 
+6.  Socket requests are handled in listeners directory 
+	* index.js is handling events 
+7. Database transactions are handled in models directory
+	* db.js file is used to setup database connection
+	* pending_queue.js file is linked with pending_queue table in database. (sql file attached)
+
 
 **NOTE:** All files are well commented, Open files for more details
