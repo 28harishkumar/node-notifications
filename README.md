@@ -1,11 +1,11 @@
 # Basic Info
--------------------------------------------------------------------------------
+--------------
 Framework used: Express.io
 Template: Jade
 Purpose: Sending data to client from node server using socket.io and GCM token (only on androids).
 
 # Installation
------------------------------------------------------------------
+--------------
 Set config.js file
 	- auth_token (a random secret string, this token will be sent from remote server in each request).
 	- gcm_authorization_key (API key of google app)
@@ -17,15 +17,15 @@ Run these commands in terminal:
 
 
 # How to use
-------------------------------------------------------------------
+----------
 Step 1) Include script for client
----------------------------------
+-----
 
 First of all include these files in frontend page:
 
-1) <script src="/socket.io/socket.io.js"></script>
-2) <script src="http://code.jquery.com/jquery-1.7.1.min.js">
-3) <script src="/public/javascripts/socket.js"> 
+1) 	<script src="/socket.io/socket.io.js"></script>
+2) 	<script src="http://code.jquery.com/jquery-1.7.1.min.js">
+3) 	<script src="/public/javascripts/socket.js"> 
 
 Last file provides a socketio() function which accepts three parameters:
 	- link of node server
